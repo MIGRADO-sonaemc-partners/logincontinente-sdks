@@ -1,0 +1,61 @@
+{
+  "name": "continente-credentials-web-sdk",
+  "version": "1.0.5",
+  "description": "Continente Credentials Web SDK",
+  "main": "build/index.js",
+  "scripts": {
+    "start": "env-cmd -f .env webpack serve --config webpack.config.demo.js",
+    "build": "env-cmd -f .env webpack",
+    "build:tst": "env-cmd -f .env.tst webpack",
+    "build:staging": "env-cmd -f .env.staging webpack",
+    "build:production": "env-cmd -f .env.production webpack",
+    "build:demo": "webpack --config webpack.config.demo.js",
+    "test": "env-cmd -f .env jest",
+    "prepare": "npm run build",
+    "publish:tst": "env-cmd -f .env.tst publish-to-git --remote git@github.com:sonaemc-partners/logincontinente-sdks.git",
+    "publish:staging": "env-cmd -f .env.staging publish-to-git --remote git@github.com:sonaemc-partners/logincontinente-sdks.git",
+    "publish:production": "env-cmd -f .env.production publish-to-git --remote git@github.com:sonaemc-partners/logincontinente-sdks.git"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.0",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.3",
+    "babel-preset-minify": "^0.5.0",
+    "css-loader": "^6.6.0",
+    "env-cmd": "^10.1.0",
+    "eslint": "^8.8.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.4.7",
+    "mini-css-extract-plugin": "^2.5.3",
+    "optimize-css-assets-webpack-plugin": "^6.0.1",
+    "prettier": "^2.5.1",
+    "prettier-webpack-plugin": "^1.2.0",
+    "publish-to-git": "^1.1.9",
+    "style-loader": "^3.3.1",
+    "terser-webpack-plugin": "^5.3.1",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "4.7.4"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    },
+    "testEnvironment": "jsdom"
+  },
+  "dependencies": {
+    "@material/linear-progress": "^13.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sonaemc-digital/digital-identitymanager-logincontinente.git"
+  },
+  "files": [
+    "build"
+  ]
+}
