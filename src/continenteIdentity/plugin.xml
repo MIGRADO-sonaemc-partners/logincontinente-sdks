@@ -20,7 +20,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
            id="continenteIdentity"
-      version="1.0.0">
+      version="1.1.0">
 
     <name>Continente Identity</name>
     <description>Continente Identity Plugin</description>
@@ -43,13 +43,13 @@
         </js-module>
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="InAppBrowser">
-                <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser"/>
+                <param name="android-package" value="org.apache.cordova.inappbrowser.CntCredInAppBrowser"/>
             </feature>
         </config-file>
 
-        <source-file src="src/android/InAppBrowser.java" target-dir="src/org/apache/cordova/inappbrowser" />
-        <source-file src="src/android/InAppBrowserDialog.java" target-dir="src/org/apache/cordova/inappbrowser" />
-        <source-file src="src/android/InAppChromeClient.java" target-dir="src/org/apache/cordova/inappbrowser" />
+        <source-file src="src/android/CntCredInAppBrowser.java" target-dir="src/org/apache/cordova/inappbrowser" />
+        <source-file src="src/android/CntCredInAppBrowserDialog.java" target-dir="src/org/apache/cordova/inappbrowser" />
+        <source-file src="src/android/CntCredInAppChromeClient.java" target-dir="src/org/apache/cordova/inappbrowser" />
 
         <!-- drawable src/android/resources -->
         <resource-file src="src/android/res/drawable-hdpi/ic_action_next_item.png" target="res/drawable-hdpi/ic_action_next_item.png" />
@@ -70,26 +70,26 @@
     </platform>
 
     <!-- ios -->
-    <platform name="ios">
+<platform name="ios">
         <js-module src="www/inappbrowser.js" name="inappbrowser">
             <clobbers target="continenteIdentityOpen" />
             <!-- <clobbers target="window.open" /> -->
         </js-module>
         <config-file target="config.xml" parent="/*">
             <feature name="InAppBrowser">
-                <param name="ios-package" value="CDVWKInAppBrowser" />
+                <param name="ios-package" value="LCntCDVWKInAppBrowser" />
                 <param name="onload" value="true" />
             </feature>
         </config-file>
 
-        <header-file src="src/ios/CDVInAppBrowserOptions.h" />
-        <source-file src="src/ios/CDVInAppBrowserOptions.m" />
-        <header-file src="src/ios/CDVInAppBrowserNavigationController.h" />
-        <source-file src="src/ios/CDVInAppBrowserNavigationController.m" />
-	    <header-file src="src/ios/CDVWKInAppBrowser.h" />
-	    <source-file src="src/ios/CDVWKInAppBrowser.m" />
-	    <header-file src="src/ios/CDVWKInAppBrowserUIDelegate.h" />
-	    <source-file src="src/ios/CDVWKInAppBrowserUIDelegate.m" />
+        <header-file src="src/ios/LCntCDVInAppBrowserOptions.h" />
+        <source-file src="src/ios/LCntCDVInAppBrowserOptions.m" />
+        <header-file src="src/ios/LCntCDVInAppBrowserNavigationController.h" />
+        <source-file src="src/ios/LCntCDVInAppBrowserNavigationController.m" />
+	    <header-file src="src/ios/LCntCDVWKInAppBrowser.h" />
+	    <source-file src="src/ios/LCntCDVWKInAppBrowser.m" />
+	    <header-file src="src/ios/LCntCDVWKInAppBrowserUIDelegate.h" />
+	    <source-file src="src/ios/LCntCDVWKInAppBrowserUIDelegate.m" />
 
 	    <framework src="CoreGraphics.framework" />
     </platform>

@@ -19,46 +19,46 @@
  *
  */
 
-function dec2hex(dec) {
-  return ("0" + dec.toString(16)).substr(-2);
-}
+// function dec2hex(dec) {
+//   return ("0" + dec.toString(16)).substr(-2);
+// }
 
-function generateRandomString() {
-  var array = new Uint32Array(56 / 2);
-  window.crypto.getRandomValues(array);
-  return Array.from(array, dec2hex).join("");
-}
+// function generateRandomString() {
+//   var array = new Uint32Array(56 / 2);
+//   window.crypto.getRandomValues(array);
+//   return Array.from(array, dec2hex).join("");
+// }
 
-function sha256(plain) {
-  // returns promise ArrayBuffer
-  const encoder = new TextEncoder();
-  const data = encoder.encode(plain);
-  return window.crypto.subtle.digest("SHA-256", data);
-}
+// function sha256(plain) {
+//   // returns promise ArrayBuffer
+//   const encoder = new TextEncoder();
+//   const data = encoder.encode(plain);
+//   return window.crypto.subtle.digest("SHA-256", data);
+// }
 
-function base64urlencode(a) {
-  var str = "";
-  var bytes = new Uint8Array(a);
-  var len = bytes.byteLength;
-  for (var i = 0; i < len; i++) {
-    str += String.fromCharCode(bytes[i]);
-  }
-  return btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-}
+// function base64urlencode(a) {
+//   var str = "";
+//   var bytes = new Uint8Array(a);
+//   var len = bytes.byteLength;
+//   for (var i = 0; i < len; i++) {
+//     str += String.fromCharCode(bytes[i]);
+//   }
+//   return btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+// }
 
-function challenge_from_verifier(v) {
-  return sha256(v)
-    .then((hashed) => {
-      const base64encoded = base64urlencode(hashed);
-      debugger;
-      return base64encoded;
-    })
-    .catch((e) => {
-      debugger;
-      console.warn(e);
-      return null;
-    });
-}
+// function challenge_from_verifier(v) {
+//   return sha256(v)
+//     .then((hashed) => {
+//       const base64encoded = base64urlencode(hashed);
+//       debugger;
+//       return base64encoded;
+//     })
+//     .catch((e) => {
+//       debugger;
+//       console.warn(e);
+//       return null;
+//     });
+// }
 
 (function () {
   // special patch to correctly work on Ripple emulator (CB-9760)
@@ -145,21 +145,21 @@ function challenge_from_verifier(v) {
 
     var iab = new InAppBrowser();
 
-    var codeVerifier = generateRandomString();
+    // var codeVerifier = generateRandomString();
 
-    challenge_from_verifier(codeVerifier)
-      .then((challenge) => {
+    // challenge_from_verifier(codeVerifier)
+    //   .then((challenge) => {
         var url = new URL(strUrl);
         url.searchParams.append("clientId", clientId);
         // url.searchParams.append('code_verifier', clientId);
-        url.searchParams.append("code_challenge", challenge);
-        url.searchParams.append("code_challenge_method", "S256");
+        // url.searchParams.append("code_challenge", challenge);
+        // url.searchParams.append("code_challenge_method", "S256");
 
         function onSuccessWrapper(params) {
           if (params?.data) {
             let result = {
               authorization_code: params?.data?.authorization_code ?? "",
-              code_verifier: codeVerifier,
+              code_verifier: params?.data?.code_verifier ?? ""
             };
             iab.close();
             onSuccessCallback(result);
@@ -198,15 +198,16 @@ function challenge_from_verifier(v) {
           strWindowFeatures,
           clientId,
         ]);
+        
         return iab;
-      })
-      .catch(() => {
-        let error = {
-          code: "500001",
-          message: "Error Creating Challenge",
-        };
-        onErrorCallback(error);
-        return null;
-      });
+      // })
+      // .catch(() => {
+      //   let error = {
+      //     code: "500001",
+      //     message: "Error Creating Challenge",
+      //   };
+      //   onErrorCallback(error);
+      //   return null;
+      // });
   };
 })();
